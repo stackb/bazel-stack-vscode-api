@@ -3,6 +3,7 @@ import * as vscode from 'vscode';
 import { extensionContributionSection, extensionId as bazelStackVscodeExtensionId, problemMatchersContributionSection } from './constants';
 import { Config } from './problemMatcher';
 import { isArray, isObject, isUndefined } from './types';
+export * from './problemMatcher';
 
 /**
  * This is the interface offered by the bazel-stack-vscode extension for
