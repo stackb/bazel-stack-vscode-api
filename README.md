@@ -65,9 +65,13 @@ create this extension:
    rules and ensure these are an exact string match (the mnemonic name of the
    action is used to find the correct problem matcher).
 1. Make sure your problem matcher definitions have tests.  The API has a test
-   runner that makes it easy to write tests with examples.
+   runner that makes it easy to [write tests with examples](https://github.com/stackb/bazel-stack-vscode-go/blob/master/src/test/suite/extension.test.ts).
 1. [Publish your extension](https://code.visualstudio.com/api/working-with-extensions/publishing-extension) to the vscode marketplace.
 1. Install the extension within vscode.  At extension load time, your extension
    will find the `bazel-stack-vscode` extension and populate it with your
    problem matchers.  At runtime, these problem matchers will be used to create
    tool-specific diagnostics.
+
+## Problem Matcher Extensions
+
+- [stackb/bazel-stack-vscode-go](https://github.com/stackb/bazel-stack-vscode-go)
