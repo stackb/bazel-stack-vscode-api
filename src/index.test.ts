@@ -1,4 +1,5 @@
 import { BazelStackVSCodeAPI } from '.';
+export { ProblemMatcherTest, ProblemMatcherTestRunner } from '../src/test/problemMatcherTestRunner';
 
 describe('registerProblemMatchers', () => {
 	it('should call registration API function', () => {
