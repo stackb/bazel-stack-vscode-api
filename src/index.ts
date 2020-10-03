@@ -1,9 +1,7 @@
 import path = require('path');
 import * as vscode from 'vscode';
+import { problemMatcher, types } from 'vscode-common';
 import { extensionContributionSection, extensionId as bazelStackVscodeExtensionId, problemMatchersContributionSection } from './constants';
-import { Config } from './problemMatcher';
-import { isArray, isObject, isUndefined } from './types';
-export * from './problemMatcher';
 
 /**
  * This is the interface offered by the bazel-stack-vscode extension for
@@ -15,7 +13,7 @@ export interface BazelStackVSCodeAPI {
 	 * @param configs Named problem matchers to contribute.
 	 * @return A Disposable that unregisters this provider when being disposed.
 	 */
-	registerProblemMatchers(configs: Config.NamedProblemMatcher[]): vscode.Disposable;
+	registerProblemMatchers(configs: problemMatcher.Config.NamedProblemMatcher[]): vscode.Disposable;
 }
 
 /**
@@ -30,7 +28,7 @@ export interface BazelStackVSCodeAPI {
 export function registerProblemMatchers(context: vscode.ExtensionContext) {
 
 	const api = vscode.extensions.getExtension<BazelStackVSCodeAPI>(bazelStackVscodeExtensionId);
-	if (isUndefined(api)) {
+	if (types.isUndefined(api)) {
 		throw new Error(
 			`Extension ${bazelStackVscodeExtensionId} not found. 
 			 Please ensure the extension declares an "extensionDependencies" = ["${bazelStackVscodeExtensionId}"] in the package.json`);
@@ -43,14 +41,14 @@ export function registerProblemMatchers(context: vscode.ExtensionContext) {
 	
 	const packageJSON = require(path.join(context.extensionPath, 'package.json'));
 	const contributionSection = packageJSON[extensionContributionSection];
-	if (!isObject(contributionSection)) {
+	if (!types.isObject(contributionSection)) {
 		throw new Error(`the extension providing the problem matchers must have a section "${extensionContributionSection}" in the package.json`);
 	}
 
 	const problemMatchers = contributionSection[problemMatchersContributionSection];
-	if (!isArray(problemMatchers)) {
+	if (!types.isArray(problemMatchers)) {
 		throw new Error(`the extension providing the problem matchers must have a section "${extensionContributionSection}.${problemMatchersContributionSection}" in the package.json`);
 	}
 	
-	context.subscriptions.push(api.exports.registerProblemMatchers(problemMatchers as Config.NamedProblemMatcher[]));
+	context.subscriptions.push(api.exports.registerProblemMatchers(problemMatchers as problemMatcher.Config.NamedProblemMatcher[]));
 }

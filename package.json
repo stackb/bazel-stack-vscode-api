@@ -2,7 +2,7 @@
   "name": "bazel-stack-vscode-api",
   "description": "API for the bazel-stack-vscode extension",
   "author": "Paul Johnston <pcj@stack.build>",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -23,7 +23,9 @@
     "test": "jest",
     "prepare": "npm run compile && npm run lint"
   },
-  "dependencies": {},
+  "dependencies": {
+    "vscode-common": "1.49.0"
+  },
   "devDependencies": {
     "@types/jest": "^26.0.14",
     "@types/node": "^14.11.2",
